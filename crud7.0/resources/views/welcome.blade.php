@@ -7,6 +7,7 @@
         <title>Laravel</title>
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -29,10 +30,11 @@
         </header>
         <section class="body-section">
             <div class="container">
-                <form class = "py-5" method="post" action="{{url('/create/ticket')}}">
+                <form class = "py-5" method="post" action="{{url('/todo/add')}}">
+                    @csrf
                     <div class="form-group">
                         <label for="exampleInputEmail1">Name</label>
-                        <input name="name" type="text" class="form-control" id="exampleInputName" aria-describedby="emailHelp" placeholder="Enter Name">
+                        <input name="name" type="text" value="{{ @$item->name }}" class="form-control" id="exampleInputName" aria-describedby="emailHelp" placeholder="Enter Name">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email address</label>
@@ -51,22 +53,26 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">First</th>
-                            <th scope="col">Last</th>
-                            <th scope="col">Handle</th>
-                            <th scope="col">Handle</th>
+                            <th scope="col">ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">Todo</th>
+                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th>1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>Otto</td>
-                            <td><a href="#">edit</a><a href="#">delete</a></td>
-                        </tr>
+                        @foreach ($todos as $todo)
                         
+                        <tr>
+                            <th>{{$todo->id}}</th>
+                            <td>{{$todo->name}}</td>
+                            <td>{{$todo->email}}</td>
+                            <td>{{$todo->phone}}</td>
+                            <td>{{$todo->todo}}</td>
+                            <td><a href="{{route('editTodo',['id'=>$todo->id])}}">edit </a><a href="{{route('destroyTodo',['id'=>$todo->id])}}"> Delete</a></td>
+                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

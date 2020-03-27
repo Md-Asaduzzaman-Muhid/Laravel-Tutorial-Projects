@@ -13,11 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// })->name('home');
 
 Auth::routes();
-
-Route::get('/todos', 'TodoController@index')->name('todos');
+Route::get('/', 'TodoController@index')->name('home');
 Route::post('/todo/add', 'TodoController@store')->name('addTodo');
+Route::get('/destroy/{id}', 'TodoController@destroy')->name('destroyTodo');
+Route::get('/edit/{id}', 'TodoController@edit')->name('editTodo');
+
+
