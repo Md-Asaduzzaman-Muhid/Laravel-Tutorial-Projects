@@ -38,7 +38,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email address</label>
-                        <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                        <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Phone</label>
@@ -70,14 +70,50 @@
                             <td>{{$todo->email}}</td>
                             <td>{{$todo->phone}}</td>
                             <td>{{$todo->todo}}</td>
-                            <td><a href="{{route('editTodo',['id'=>$todo->id])}}">edit </a><a href="{{route('destroyTodo',['id'=>$todo->id])}}"> Delete</a></td>
+                            <td><a data-toggle="modal" data-target="#exampleModalCenter" href="{{route('editTodo',['id'=>$todo->id])}}">edit </a><a href="{{route('destroyTodo',['id'=>$todo->id])}}"> Delete</a></td>
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
-
         </section>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Edit Todo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class = "py-3" method="post" action="{{url('/todo/add')}}">
+                        @csrf
+                        @method('PUT')
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Name</label>
+                            <input name="name" type="text" value="{{ @$item->name}}" class="form-control" id="exampleInputName" aria-describedby="emailHelp" placeholder="Enter Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Phone</label>
+                            <input name="phone" type="text" class="form-control" id="exampleInputPhone" aria-describedby="emailHelp" placeholder="Enter Phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Todo</label>
+                            <input name="todo" type="text" class="form-control" id="exampleInputTodo" aria-describedby="emailHelp" placeholder="Enter Todo">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Edit Todo</button>
+                    </form>
+                </div>
+                </div>
+            </div>
+        </div>
 
        <footer class="bg-dark py-2"> 
             <div class="container">

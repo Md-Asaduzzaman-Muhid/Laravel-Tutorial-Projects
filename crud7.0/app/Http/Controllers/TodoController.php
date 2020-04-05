@@ -15,7 +15,6 @@ class TodoController extends Controller
     public function index()
     {
         $todos = Todo::all();
-        //json_encode($todos);
         return view('welcome')->with('todos',$todos);
     }
 
