@@ -3,7 +3,7 @@
 @section('content')
 <section class="body-section">
             <div class="container">
-                <form class = "py-5" method="post" action="{{url('/todo/add')}}">
+                <form class = "py-5" method="post" action="{{ route('addTodo') }}">
                     @csrf
                     <div class="form-group">
                         <label for="exampleInputEmail1">Name</label>
@@ -43,7 +43,8 @@
                             <td>{{$todo->email}}</td>
                             <td>{{$todo->phone}}</td>
                             <td>{{$todo->todo}}</td>
-                            <td><a data-toggle="modal" data-target="#exampleModalCenter" href="{{route('editTodo',['id'=>$todo->id])}}">edit </a><a href="{{route('destroyTodo',['id'=>$todo->id])}}"> Delete</a></td>
+                            <td><a href="{{route('editTodo',['id'=>$todo->id])}}">edit </a>
+                            <a href="{{route('destroyTodo',['id'=>$todo->id])}}"> Delete</a></td>
                         </tr>
                         @endforeach
                     </tbody>

@@ -3,7 +3,7 @@
 @section('content')
 <section class="body-section">
             <div class="container">
-                <form class = "py-5" method="post" action="{{url('/todo/add')}}">
+                <form class = "py-5" method="post" action="{{route('editTodo',['id'=>$todo->id])}}">
                     @csrf
                     <div class="form-group">
                         <label for="exampleInputEmail1">Name</label>
@@ -11,17 +11,17 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email address</label>
-                        <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
+                        <input name="email" type="email" value="{{ @$item->email }}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Phone</label>
-                        <input name="phone" type="text" class="form-control" id="exampleInputPhone" aria-describedby="emailHelp" placeholder="Enter Phone">
+                        <input name="phone" type="text" value="{{ @$item->phone }}" class="form-control" id="exampleInputPhone" aria-describedby="emailHelp" placeholder="Enter Phone">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Todo</label>
-                        <input name="todo" type="text" class="form-control" id="exampleInputTodo" aria-describedby="emailHelp" placeholder="Enter Todo">
+                        <input name="todo" type="text" value="{{ @$item->todo }}" class="form-control" id="exampleInputTodo" aria-describedby="emailHelp" placeholder="Enter Todo">
                     </div>
-                    <button type="submit" class="btn btn-primary">Add Todo</button>
+                    <button type="submit" class="btn btn-primary">Save Todo</button>
                 </form>
             </div>
         </section>
