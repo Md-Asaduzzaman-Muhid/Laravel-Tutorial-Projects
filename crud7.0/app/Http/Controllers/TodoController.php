@@ -15,7 +15,7 @@ class TodoController extends Controller
     public function index()
     {
         $todos = Todo::all();
-        return view('welcome')->with('todos',$todos);
+        return view('components.add')->with('todos',$todos);
     }
 
     /**
@@ -71,7 +71,7 @@ class TodoController extends Controller
     public function edit($id)
     {
         $item = Todo::find($id);
-        return view('welcome')->with('item',$item);
+        return view('components.edit')->with('item',$item);
     }
 
     /**
